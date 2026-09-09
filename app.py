@@ -3,6 +3,8 @@
 import html
 import json
 import os
+from textwrap import dedent
+
 import streamlit as st
 from groq import Groq
 
@@ -541,7 +543,7 @@ def render_dashboard(roadmap):
     # COMPLETE HTML
     # =========================
 
-    html = f"""
+    html = dedent(f"""
 
     <style>
 
@@ -1575,13 +1577,13 @@ def render_dashboard(roadmap):
 
     </div>
 
-    """
+    """).strip()
 
     return html
 
 
 # ==========================================
-# GRADIO DASHBOARD
+# STREAMLIT DASHBOARD OUTPUT
 # ==========================================
 
 
@@ -1725,7 +1727,7 @@ roadmap = st.session_state.get("roadmap")
 if roadmap:
     st.markdown("## 🗺️ Your Personalized Roadmap")
     dashboard_html = render_dashboard(roadmap)
-    st.markdown(dashboard_html, unsafe_allow_html=True)
+    st.html(dashboard_html)
 else:
     st.markdown("## 🗺️ Your Personalized Roadmap")
     st.markdown(
